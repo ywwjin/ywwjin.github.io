@@ -1,17 +1,59 @@
 body {
-  font-family: 'Pretendard', sans-serif;
   margin: 0;
   background: #f5f7fa;
-  color: #333;
+  font-family: Arial, sans-serif;
 }
 
-header {
-  background: #1f2937;
+/*basic card style*/
+.card {
+  position: absolute;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  width: 180px;
+  cursor: grab;
+  user-select: none;
+  transition: box-shadow 0.3s;
+}
+
+.card.dragging{
+  cursor: grabbing;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+
+/*fixed card position*/
+.fixed.intro {
+  top: 150px;
+  left: 260px;
+}
+
+.fixed.contact-card {
+  top: 420px;
+  left: 300px;
+}
+
+.fixed.about-card {
+  top: 260px;
+  right: 200px;
+}
+
+.fixed {
+  position: fixed;
+}
+
+
+.header {
+  background: #2c64b3;
   color: white;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.main{
+  flex: 1;
 }
 
 nav a {
@@ -22,4 +64,5 @@ nav a {
 
 .content {
   padding: 2rem;
+  flex: 1;
 }
