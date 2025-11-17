@@ -3,6 +3,16 @@ body {
   background: #f5f7fa;
   font-family: Arial, sans-serif;
 }
+/*image card style*/
+.image-card img{
+  width: 180px;
+  height: 135px; /*가로세로 비율 4:3*/
+  overflow: hidden;
+  position: relative;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 
 /*basic card style*/
 .card {
