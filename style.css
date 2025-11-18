@@ -74,16 +74,18 @@ html, body {
   background: aliceblue;
   top: 25%;
   left: 60%;
+  z-index: 990;
 }
 
 .fixed.about-card {
   background: aliceblue;
   top: 70%;
   left: 20%;
+  z-index: 990;
 }
 
 .fixed {
-  position: fixed;
+  position: absolute;
 }
 
 
