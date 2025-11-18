@@ -6,13 +6,77 @@ document.addEventListener("DOMContentLoaded", () => {
   const footerHeight = footer? footer.offsetHeight : 0;
 
   // 랜덤 배치
+  const placedElements = []; //배치된 요소 저장
+
+  const fixedCards = document.querySelectorAll(".fixed");
+
+  //고정카드 위치 먼저 가져오기 & 저장
+  fixedCards.forEach(card => {
+    placedElements.push({
+      left: card.offsetLeft,
+      top: card.offsetTop,
+      width: card.offsetWidth,
+      height: card.offsetHeight,
+      area: card.offsetWidth * card.offsetHeight
+    });
+  });
+
+  // 랜덤 카드 배치
   randomCards.forEach(card => {
-    const usableWidth = window.innerWidth - 220;
-    const usableHeight = window.innerHeight - headerHeight - footerHeight - 50;
-    const x = Math.random() * usableWidth;
-    const y = headerHeight + Math.random() * usableHeight;
+    const width = card.offsetWidth || 250;
+    const height = card.offsetHeight || 200;
+    const myarea = width * height;
+
+    const usableWidth = window.innerWidth - width - 20;
+    const usableHeight = window.innerHeight - headerHeight - footerHeight - filterHeight - height - 20;
+    
+    let x,y;
+    let isTooMuchOverlap = true;
+    let attempts = 0;
+    const maxAttempts = 20;
+
+    while(isTooMuchOverlap && attempts < maxAttempts){
+      isTooMuchOverlap = false;
+      attempts++;
+
+      // 랜덤 좌표 생성
+      x = Math.random() * usableWidth;
+      y = headerHeight + filterHeight + Math.random() * usableHeight;
+
+      //오버랩 계산하기
+      for (const placed of placedElements){
+        // 두 사각형이 겹치는 영역의 크기 계산
+        // 기준이 되는 랜덤카드 x,y
+        const startX = Math.max(x, placed.left); //왼쪽씩 비교
+        const endX = Math.min(x + width, placed.left + placed.width); //오른쪽씩 비교
+        const startY = Math.max(y, placed.top);
+        const endY = Math.min(y + height, placed.top + placed.height);
+
+        // 겹치는 길이 계산
+        const overlapWidth = endX - startX;
+        const overlapHeight = endY - startY;
+
+        // 실제 겹치는 것인지 확인
+        if (overlapWidth > 0 && overlapHeight > 0){
+          const overlapArea = overlapHeight * overlapWidth;
+          if (overlapArea > 0.5 * myarea){
+            isTooMuchOverlap = true;
+            break;
+          }
+        }
+      }
+    }
     card.style.left = x + "px";
     card.style.top = y + "px";
+
+    // 확정된 위치 배열에 저장
+    placedElements.push({
+      left: x,
+      top: y,
+      width: width,
+      height: height,
+      area: myarea
+    });
   });
 
   // 드래그 기능 (PC + 모바일, .dragging class 적용)
