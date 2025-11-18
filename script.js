@@ -52,4 +52,42 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("touchmove", move, { passive: false });
     document.addEventListener("touchend", end);
   });
+
+  // 필터 기능 ///
+  //button click
+    const buttons = document.querySelectorAll('.card-filter button');
+    const cards = document.querySelectorAll('.card');
+
+    let activeFilters = new Set();
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        //filter toggle
+        // 있으면 빼고, 없으면 추가
+        if (activeFilters.has(filter)){
+          activeFilters.delete(filter);
+          btn.classList.remove('active');
+        } else {
+          activeFilters.add(filter);
+          btn.classList.add('active');
+        }
+
+        //필터가 없으면 모두 보이기
+        if (activeFilters.size === 0) {
+          cards.forEach(card => {
+            card.style.display = 'block';
+          });
+          return;
+        }
+
+        //필터가 있으면 카드들 필터링
+        cards.forEach(card => {
+          //card 클래스 중 activefilters 중 하나라도 포함되는지 체크
+          const matches = [...activeFilters].some(f => card.classList.contains(f));
+          card.style.display = matches ? 'block' : 'none';
+        });
+    });
+  });
 });
