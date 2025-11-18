@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   const randomCards = document.querySelectorAll(".random");
+  const allCards = document.querySelectorAll(".card");
   const header = document.querySelector("header");
   const footer = document.querySelector("footer");
+  const filter = document.querySelector(".card-filter");
   const headerHeight = header? header.offsetHeight : 0;
   const footerHeight = footer? footer.offsetHeight : 0;
+  const filterHeight = filter? filter.offsetHeight : 0;
 
   // 랜덤 배치
   const placedElements = []; //배치된 요소 저장
