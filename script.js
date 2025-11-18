@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 랜덤 배치
   randomCards.forEach(card => {
     const usableWidth = window.innerWidth - 220;
-    const usableHeight = window.innerHeight - headerHeight - footerHeight - 20;
+    const usableHeight = window.innerHeight - headerHeight - footerHeight - 50;
     const x = Math.random() * usableWidth;
     const y = headerHeight + Math.random() * usableHeight;
     card.style.left = x + "px";
@@ -17,9 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 드래그 기능 (PC + 모바일, .dragging class 적용)
   randomCards.forEach(card => {
-    let offsetX = 0, offsetY = 0, isDown = false;
+    let offsetX = 0, offsetY = 0, isDown = false, isDragging = false;
 
     const start = (e) => {
+      isDragging = true;
       isDown = true;
       card.classList.add("dragging"); // 드래그 스타일
       const evt = e.touches ? e.touches[0] : e;
@@ -29,7 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const move = (e) => {
-      if (!isDown) return;
+      if (!isDown && !isDragging) return;
+      e.preventDefault(); //터치 스크롤 방지
       const evt = e.touches ? e.touches[0] : e;
       card.style.left = (evt.clientX - offsetX) + "px";
       card.style.top = (evt.clientY - offsetY) + "px";
@@ -38,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const end = () => {
       if (isDown) {
         isDown = false;
+        isDragging = false;
         card.classList.remove("dragging"); // 드래그 스타일 해제
       }
     };
