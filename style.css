@@ -3,6 +3,29 @@ body {
   background: #f5f7fa;
   font-family: Arial, sans-serif;
 }
+
+.card-filter{
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin: 1em 0;
+}
+
+.card-filter button{
+  padding: 0.5em 1em;
+  border: none;
+  background: #007BFF;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.card-filter button.active{
+  background: #0056b3;
+  color: #fff;
+}
+
 /*image card style*/
 .image-card img{
   width: 180px;
@@ -12,7 +35,6 @@ body {
   background: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-
 
 /*basic card style*/
 .card {
@@ -25,7 +47,6 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   width: 180px;
   cursor: grab;
-  user-select: none;
   transition: box-shadow 0.3s;
 }
 
@@ -37,20 +58,24 @@ body {
 /*fixed card position*/
 .fixed.intro {
   background: aliceblue;
-  top: 250px;
-  left: 260px;
+  top: 50%;
+  left: 35%;
+  z-index: 990;
+  width: 300px;
+  height: auto;
+  font-size: 20px;
 }
 
 .fixed.contact-card {
   background: aliceblue;
-  top: 520px;
-  left: 300px;
+  top: 25%;
+  left: 60%;
 }
 
 .fixed.about-card {
   background: aliceblue;
-  top: 400px;
-  right: 200px;
+  top: 70%;
+  left: 20%;
 }
 
 .fixed {
