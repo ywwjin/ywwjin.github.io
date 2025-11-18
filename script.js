@@ -80,21 +80,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 드래그 기능 (PC + 모바일, .dragging class 적용)
-  randomCards.forEach(card => {
+  allCards.forEach(card => {
     let offsetX = 0, offsetY = 0, isDown = false, isDragging = false;
 
     const start = (e) => {
-      isDragging = true;
+      isDragging = false;
       isDown = true;
       card.classList.add("dragging"); // 드래그 스타일
       const evt = e.touches ? e.touches[0] : e;
       offsetX = evt.clientX - card.offsetLeft;
       offsetY = evt.clientY - card.offsetTop;
-      card.style.zIndex = 999; // 가장 위에 보이도록 함
+      card.style.zIndex = 9999; // 가장 위에 보이도록 함
     };
 
     const move = (e) => {
-      if (!isDown && !isDragging) return;
+      if (!isDown) return;
+      isDragging = true;
       e.preventDefault(); //터치 스크롤 방지
       const evt = e.touches ? e.touches[0] : e;
       card.style.left = (evt.clientX - offsetX) + "px";
