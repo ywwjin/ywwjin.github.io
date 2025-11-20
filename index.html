@@ -7,17 +7,7 @@
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
-        <header>
-            <div class="header">
-                <h2>Yourname</h2>
-                <nav>
-                    <a href="index.html">Home</a>
-                    <a href="aboutme.html">About Me</a>
-                    <!--<a href="https://github.com">Github</a>-->
-                </nav>
-            </div>
-            
-        </header>
+        <header></header>
 
         <main>
             <div class="card-filter">
@@ -28,20 +18,43 @@
 
             <!--고정 카드들-->
             <div class="card fixed intro">
-                안녕하세요!
-                <br> 저는 yourname입니다😉 
-                <br> 저는 000한 000입니다. 
-                <br> 언제나 000 하는 사람입니다.
+                <span>
+                    I like to program.
+                </span>
             </div>
-            <div class="card fixed contact-card">📩 Contact<br>email@example.com</div>
-            <div class="card fixed about-card">about me</div>
+            <div class="card fixed contact-card">
+                📩 You can find me on..<br>
+                email@example.com
+                <a class="link" href="https://naver.com">blog</a><br>
+                linkedin<br>
+                github<br>
+            </div>
+            <div class="card fixed about-card">more about me</div>
 
-            <!--랜덤 카드들-->
+            <!--프로젝트 랜덤 카드들-->
             <div class="card random projects">
-                <a href="projecta.html">Project A: 000 프로그램</a>
+                <img src="images/paperie.png" alt="paperie main image">
+                <a class="card-name card-link" href="projecta.html">
+                    <span>paperie</span>
+                </a>
+                <span class="card-name" style="opacity: 0.2;">2023–</span>
             </div>
-            <div class="card random projects">Project B</div>
-            <div class="card random projects">Project C</div>
+
+            <div class="card random projects">
+                <img src="images/strike_a_pose.png" alt="strike_a_pose main image">
+                <a class="card-name card-link" href="projectb.html">
+                    <span>strike a pose</span>
+                </a>
+                <span class="card-name" style="opacity: 0.2;">2025</span>
+            </div>
+
+            <div class="card random projects">
+                <img src="images/strike_a_pose.png" alt="strike_a_pose main image">
+                <a class="card-name card-link" href="projectc.html">
+                    <span>hello test</span>
+                </a>
+                <span class="card-name" style="opacity: 0.2;">2025</span>
+            </div>
 
             <!--이미지 카드들-->
             <div class="card random image-card">
@@ -50,7 +63,7 @@
         </main>
           <script src="script.js"></script>
           <footer>
-            <p>© 2025 Yourname</p>
+            <!--<p>© 2025 Yourname</p>-->
         </footer>
     </body>
 </html>
