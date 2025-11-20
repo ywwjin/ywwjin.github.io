@@ -13,16 +13,21 @@ function loadHeader() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  loadHeader();
   const randomCards = document.querySelectorAll(".random");
   const allCards = document.querySelectorAll(".card");
-  const header = document.querySelector("header");
-  const footer = document.querySelector("footer");
-  const filter = document.querySelector(".card-filter");
-  const headerHeight = header? header.offsetHeight : 0;
-  const footerHeight = footer? footer.offsetHeight : 0;
-  const filterHeight = filter? filter.offsetHeight : 0;
+  let globalZIndex = 100;
 
-  // 랜덤 배치
+
+  //배치 및 재배치 함수(화면 크기 바뀔때마다 호출)
+  function layoutCards(){
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+    const filter = document.querySelector(".card-filter");
+    const headerHeight = header? header.offsetHeight : 0;
+    const footerHeight = footer? footer.offsetHeight : 0;
+    const filterHeight = filter? filter.offsetHeight : 0;
+    // 랜덤 배치
   const placedElements = []; //배치된 요소 저장
 
   const fixedCards = document.querySelectorAll(".fixed");
@@ -44,13 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const height = card.offsetHeight || 200;
     const myarea = width * height;
 
+    const safeY = headerHeight + filterHeight + 40
     const usableWidth = window.innerWidth - width - 20;
-    const usableHeight = window.innerHeight - headerHeight - footerHeight - filterHeight - height - 20;
+    const usableHeight = window.innerHeight - headerHeight - footerHeight - filterHeight - height - 100;
     
     let x,y;
     let isTooMuchOverlap = true;
     let attempts = 0;
-    const maxAttempts = 20;
+    const maxAttempts = 40;
 
     while(isTooMuchOverlap && attempts < maxAttempts){
       isTooMuchOverlap = false;
@@ -76,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 실제 겹치는 것인지 확인
         if (overlapWidth > 0 && overlapHeight > 0){
           const overlapArea = overlapHeight * overlapWidth;
-          if (overlapArea > 0.5 * myarea){
+          if (overlapArea > 0.45 * myarea){
             isTooMuchOverlap = true;
             break;
           }
@@ -85,6 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     card.style.left = x + "px";
     card.style.top = y + "px";
+    card.style.display = "block";
+
+    const rotate = (Math.random() * 30) - 15;
+    card.style.transform = `rotate(${rotate}deg)`;
 
     // 확정된 위치 배열에 저장
     placedElements.push({
@@ -95,6 +105,23 @@ document.addEventListener("DOMContentLoaded", () => {
       area: myarea
     });
   });
+  }
+  
+  //처음 로드될 때 리사이즈 실행
+  layoutCards();
+  
+
+  
+
+  //화면 크기 변경 감지(resize observer)
+  let resizeTimer;
+  window.addEventListener('resize', () =>{
+    clearTimeout(resizeTimer);
+    //사용자가 손을 떼고 0.2초 뒤에 한 번 실행
+    resizeTimer = setTimeout(() => {
+      layoutCards();
+    }, 200);
+  });
 
   // 드래그 기능 (PC + 모바일, .dragging class 적용)
   allCards.forEach(card => {
@@ -103,11 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const start = (e) => {
       isDragging = false;
       isDown = true;
+      globalZIndex++;
+      card.style.zIndex = globalZIndex;
       card.classList.add("dragging"); // 드래그 스타일
       const evt = e.touches ? e.touches[0] : e;
       offsetX = evt.clientX - card.offsetLeft;
       offsetY = evt.clientY - card.offsetTop;
-      card.style.zIndex = 9999; // 가장 위에 보이도록 함
     };
 
     const move = (e) => {
