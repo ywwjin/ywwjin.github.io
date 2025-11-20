@@ -9,7 +9,12 @@ function loadHeader() {
         </nav>
     </div>
   `;
-  document.querySelector("header").innerHTML = headerHTML;
+  //document.querySelector("header").innerHTML = headerHTML;
+  const headerEl = document.querySelector("header");
+  if (!headerEl) {
+    return;
+  }
+  headerEl.innerHTML = headerHTML;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const randomCards = document.querySelectorAll(".random");
   const allCards = document.querySelectorAll(".card");
   let globalZIndex = 100;
+  let activeFilters = new Set();
 
 
   //배치 및 재배치 함수(화면 크기 바뀔때마다 호출)
@@ -91,8 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     card.style.left = x + "px";
     card.style.top = y + "px";
-    card.style.display = "block";
 
+    if(activeFilters.size === 0){
+      card.style.display = "block";
+    } else {
+      const matches = [...activeFilters].some(f => card.classList.contains(f));
+      card.style.display = matches ? "block" : "none";
+    }
     const rotate = (Math.random() * 30) - 15;
     card.style.transform = `rotate(${rotate}deg)`;
 
@@ -122,6 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
       layoutCards();
     }, 200);
   });
+
+
 
   // 드래그 기능 (PC + 모바일, .dragging class 적용)
   allCards.forEach(card => {
@@ -170,8 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //button click
     const buttons = document.querySelectorAll('.card-filter button');
     const cards = document.querySelectorAll('.card');
-
-    let activeFilters = new Set();
 
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
