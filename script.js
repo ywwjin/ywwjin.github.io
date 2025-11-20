@@ -1,3 +1,17 @@
+// header 고정
+function loadHeader() {
+  const headerHTML = `
+    <div class="header">
+        <h2>Yourname</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="aboutme.html">About Me</a>
+        </nav>
+    </div>
+  `;
+  document.querySelector("header").innerHTML = headerHTML;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const randomCards = document.querySelectorAll(".random");
   const allCards = document.querySelectorAll(".card");
