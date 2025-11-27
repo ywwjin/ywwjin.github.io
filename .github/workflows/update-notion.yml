@@ -1,0 +1,46 @@
+name: Update Notion Content
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 매일 자정 실행
+  workflow_dispatch:      # 수동 실행 버튼
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      # 1. 라이브러리 설치
+      - name: Install Dependencies
+        run: npm install
+
+      # 2. 노션 데이터 가져오기 스크립트 실행
+      - name: Run Update Script
+        env:
+          # GitHub Secrets 이름과 스크립트에서 쓰는 이름 매핑
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          # 사용자 스크립트가 NOTION_DATASOURCE_ID를 쓰므로 여기에 매핑
+          NOTION_DATASOURCE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: node update_projects.js
+
+      # 3. 변경사항이 있으면 커밋하고 푸시
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          # projects.json이 변경되었는지 확인
+          if [[ -n $(git status --porcelain projects.json) ]]; then
+            git add projects.json
+            git commit -m "Auto-update: Notion content synced 🔄"
+            git push
+          else
+            echo "No changes to commit"
+          fi
