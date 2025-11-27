@@ -23,6 +23,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   let globalZIndex = 100;
   let activeFilters = new Set();
 
+  function escapeHTML(text) {
+  return String(text).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', 
+    '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+
   // 2. 프로젝트 데이터 불러오기 및 카드 생성
   async function initProjects() {
     try {
@@ -43,14 +51,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         // 상세 페이지 링크 생성 (?id=노션ID)
         const detailLink = `project_detail.html?id=${p.id}`;
-
-        function escapeHTML(text) {
-          return String(text).replace(/[&<>"']/g, c => ({
-            '&': '&amp;', '<': '&lt;', '>': '&gt;', 
-            '"': '&quot;', "'": '&#39;'
-          }[c]));
-        }
-
 
         card.innerHTML = `
             <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}" onerror="this.src='https://via.placeholder.com/200x150?text=No+Image'">
