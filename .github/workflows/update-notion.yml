@@ -28,7 +28,7 @@ jobs:
           # GitHub Secrets 이름과 스크립트에서 쓰는 이름 매핑
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           # 사용자 스크립트가 NOTION_DATASOURCE_ID를 쓰므로 여기에 매핑
-          NOTION_DATASOURCE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_DATASOURCE_ID: ${{ secrets.NOTION_DATASOURCE_ID }}
         run: node update_projects.js
 
       # 3. 변경사항이 있으면 커밋하고 푸시
