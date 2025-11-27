@@ -98,7 +98,7 @@
                         '"': '&quot;', "'": '&#39;'
                     }[c]));
                 }
-                
+
         async function loadDetail() {
             // URL에서 id값 추출 (?id=...)
             const params = new URLSearchParams(window.location.search);
@@ -126,13 +126,13 @@
 
                 // 화면에 뿌리기
                 container.innerHTML = `
-                    <img src="${escapeHTML(p.image)}" class="detail-img" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
+                    <img src="${escapeHTML(project.image)}" class="detail-img" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
                     <div class="project-meta">
-                        <h1>${escapeHTML(p.title)}</h1>
-                        <p class="date">${escapeHTML(p.date)}</p>
+                        <h1>${escapeHTML(project.title)}</h1>
+                        <p class="date">${escapeHTML(project.date)}</p>
                         <div class="tag-container">${tagsHTML}</div>
                     </div>
-                    <div class="content-body">${escapeHTML(p.description)}</div>
+                    <div class="content-body">${escapeHTML(project.description)}</div>
                     ${githubBtn}
                 `;
                 
