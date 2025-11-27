@@ -8,13 +8,13 @@ console.log("환경변수 로드 상태 점검:");
 if (!process.env.NOTION_API_KEY) {
   console.error("❌ 오류: NOTION_API_KEY가 없습니다. .env 파일을 확인하세요.");
 } else {
-  console.log("✅ API Key: 로드됨 (시작: " + process.env.NOTION_API_KEY.substring(0, 4) + "***)");
+  console.log("✅ API Key");
 }
 
 if (!process.env.NOTION_DATASOURCE_ID) {
   console.error("❌ 오류: NOTION_DATASOURCE_ID 없습니다. .env 파일을 확인하세요.");
 } else {
-  console.log("✅ Database ID: 로드됨 (" + process.env.NOTION_DATASOURCE_ID + ")");
+  console.log("✅ Database ID");
 }
 console.log("-----------------------------------------");
 
