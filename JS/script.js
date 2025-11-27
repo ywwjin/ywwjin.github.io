@@ -44,12 +44,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         // 상세 페이지 링크 생성 (?id=노션ID)
         const detailLink = `project_detail.html?id=${p.id}`;
 
+        function escapeHTML(text) {
+          return String(text).replace(/[&<>"']/g, c => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', 
+            '"': '&quot;', "'": '&#39;'
+          }[c]));
+        }
+
+
         card.innerHTML = `
-            <img src="${p.image}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/200x150?text=No+Image'">
+            <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}" onerror="this.src='https://via.placeholder.com/200x150?text=No+Image'">
             <a class="card-name card-link" href="${detailLink}">
-                <span>${p.title}</span>
+                <span>${escapeHTML(p.title)}</span>
             </a>
-            <span class="card-name" style="opacity: 0.4; font-size: 0.8rem; margin-top:5px; display:block;">${p.date}</span>
+            <span class="card-name" style="opacity: 0.4; font-size: 0.8rem; margin-top:5px; display:block;">${escapeHTML(p.date)}</span>
         `;
         
         // main 태그 안에 추가
@@ -224,11 +232,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 필터 기능 ///
   //button click
     const buttons = document.querySelectorAll('.card-filter button');
-    const cards = document.querySelectorAll('.card');
 
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
+        const cards = document.querySelectorAll('.card'); //동적 카드 포함
+
 
         //filter toggle
         // 있으면 빼고, 없으면 추가
