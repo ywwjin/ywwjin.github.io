@@ -44,7 +44,7 @@ html, body {
   padding: 10px 10px 40px 10px;
 }
 
-.card.card.image-card img {
+.card.image-card img {
   width: 100%;
   height: auto;
   border: 1px solid #eee;
@@ -82,7 +82,7 @@ html, body {
 .fixed.intro {
   top: 50%;
   left: 35%;
-  width: 300px;
+  width: 200px;
   height: auto;
   font-size: 15px;
 }
@@ -91,6 +91,38 @@ html, body {
   top: 25%;
   left: 60%;
 }
+
+
+/*todo: 아래에서 위가 아니라 좌에서 우로 바꾸기!*/
+.card.fixed.contact-card a{
+  text-decoration: none; 
+  text-decoration: none; /*링크 밑줄 제거*/
+  color: inherit; /*링크 색상 제거*/
+  display: inline-block;
+  
+  /* ✨ 핵심: 배경으로 형광펜 그리기 (회색-투명 그라데이션) */
+  /* 아래에서 위로(to top), 회색(#b3b3b3)을 칠함 */
+  background-image: linear-gradient(to top, #b3b3b3 100%, transparent 100%);
+  
+  /* 처음 크기: 가로 100%, 세로 0% (안 보임) */
+  background-size: 100% 0%;
+  background-repeat: no-repeat;
+  
+  /* 위치: 왼쪽, 바닥 */
+  background-position: left bottom;
+  
+  /* 애니메이션: 크기(background-size)가 부드럽게 변함 */
+  transition: background-size 0.2s ease-in-out;
+}
+
+.card.fixed.contact-card a:hover {
+  color: inherit;
+  /* 2. 마우스 올렸을 때 동작 */
+  /* 세로 크기를 40%로 늘림 -> 형광펜이 차오르는 효과 */
+  background-size: 100% 100%; 
+}
+
+
 
 .fixed.about-card {
   top: 70%;
