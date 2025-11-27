@@ -95,7 +95,6 @@ html, body {
 
 /*todo: 아래에서 위가 아니라 좌에서 우로 바꾸기!*/
 .card.fixed.contact-card a{
-  text-decoration: none; 
   text-decoration: none; /*링크 밑줄 제거*/
   color: inherit; /*링크 색상 제거*/
   display: inline-block;
