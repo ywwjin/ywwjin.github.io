@@ -10,5 +10,17 @@
     "date": "2023-10-01",
     "github": "#",
     "image": "https://www.notion.so/images/page-cover/rijksmuseum_avercamp_1620.jpg"
+  },
+  {
+    "id": "2b8ac05e-6bdb-8017-9441-f64858d0d43b",
+    "title": "Strike A Pose",
+    "tags": [
+      "Flutter",
+      "Python"
+    ],
+    "description": "실시간 포즈 피드백 앱",
+    "date": "2025-09-01",
+    "github": "#",
+    "image": "https://www.notion.so/images/page-cover/webb2.jpg"
   }
 ]
