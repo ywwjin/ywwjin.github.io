@@ -65,6 +65,13 @@
             color: #333;
             white-space: pre-wrap; /* 줄바꿈 유지 */
         }
+
+        .content-body img{
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
         
         .github-btn {
             display: block;
@@ -124,6 +131,7 @@
                 const githubBtn = (project.github && project.github !== '#') ? 
                     `<a href="${project.github}" target="_blank" class="github-btn">GitHub Repository ↗</a>` : '';
 
+                const bodyContent = project.content || escapeHTML(project.description);
                 // 화면에 뿌리기
                 container.innerHTML = `
                     <img src="${escapeHTML(project.image)}" class="detail-img" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
@@ -132,7 +140,9 @@
                         <p class="date">${escapeHTML(project.date)}</p>
                         <div class="tag-container">${tagsHTML}</div>
                     </div>
-                    <div class="content-body">${escapeHTML(project.description)}</div>
+                    <div class="content-body">
+                        ${bodyContent}
+                    </div>
                     ${githubBtn}
                 `;
                 
