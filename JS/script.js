@@ -35,14 +35,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function initProjects() {
     try {
       // JSON 파일 읽기
-      const res = await fetch('projects.json');
+      const res = await fetch('projects.json?t=' + new Date().getTime()); //캐시 방지
       if (!res.ok) throw new Error("JSON 파일 없음");
       const projects = await res.json();
       
       const main = document.querySelector('main');
-
-      // (선택) 기존 하드코딩된 프로젝트 카드가 있다면 제거
-      //document.querySelectorAll('.card.random.projects').forEach(el => el.remove());
 
       // 데이터 기반으로 카드 생성
       projects.forEach(p => {
