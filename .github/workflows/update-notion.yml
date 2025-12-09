@@ -40,7 +40,7 @@ jobs:
           if [[ -n $(git status --porcelain projects.json) ]]; then
             git add projects.json
             git commit -m "Auto-update: Notion content synced 🔄"
-            git push
+            git push origin HEAD:develop
           else
             echo "No changes to commit"
           fi
