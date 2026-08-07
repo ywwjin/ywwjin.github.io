@@ -93,8 +93,6 @@ const postTemplate = ({ title, date, tags, bodyHTML }) => `<!DOCTYPE html>
     <style>
         body { overflow-y: auto; background-image: none; background: #f9f9f9; }
         .detail-wrapper { max-width: 800px; margin: 60px auto; padding: 40px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); min-height: 80vh; }
-        .back-btn { display: inline-block; margin-bottom: 30px; text-decoration: none; color: #333; font-weight: bold; }
-        .back-btn:hover { color: #007BFF; }
         .post-meta { text-align: center; margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #eee; }
         .post-meta h1 { font-size: 2.2rem; margin-bottom: 10px; }
         .post-meta .date { color: #888; margin-bottom: 15px; }
@@ -105,8 +103,8 @@ const postTemplate = ({ title, date, tags, bodyHTML }) => `<!DOCTYPE html>
     </style>
 </head>
 <body>
+    <header></header>
     <div class="detail-wrapper">
-        <a href="../index.html" class="back-btn">← Back to Blog</a>
         <div class="post-meta">
             <h1>${escapeHTML(title)}</h1>
             <p class="date">${escapeHTML(date)}</p>
@@ -114,6 +112,7 @@ const postTemplate = ({ title, date, tags, bodyHTML }) => `<!DOCTYPE html>
         </div>
         <div class="content-body">${bodyHTML}</div>
     </div>
+    <script src="../../JS/header.js" data-root="../../"></script>
 </body>
 </html>
 `;
@@ -128,8 +127,6 @@ const indexTemplate = (posts) => `<!DOCTYPE html>
     <style>
         body { overflow-y: auto; background-image: none; background: #f9f9f9; }
         .detail-wrapper { max-width: 800px; margin: 60px auto; padding: 40px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); min-height: 80vh; }
-        .back-btn { display: inline-block; margin-bottom: 30px; text-decoration: none; color: #333; font-weight: bold; }
-        .back-btn:hover { color: #007BFF; }
         .post-list { list-style: none; padding: 0; }
         .post-list li { padding: 18px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: baseline; }
         .post-list a { text-decoration: none; color: #333; font-size: 1.2rem; font-weight: 600; }
@@ -139,14 +136,15 @@ const indexTemplate = (posts) => `<!DOCTYPE html>
     </style>
 </head>
 <body>
+    <header></header>
     <div class="detail-wrapper">
-        <a href="../index.html" class="back-btn">← Back to Home</a>
         <h1>Blog</h1>
         ${posts.length === 0 ? '<p class="empty">아직 글이 없습니다.</p>' : `
         <ul class="post-list">
             ${posts.map((p) => `<li><a href="posts/${p.slug}.html">${escapeHTML(p.title)}</a><span class="date">${escapeHTML(p.date)}</span></li>`).join('')}
         </ul>`}
     </div>
+    <script src="../JS/header.js" data-root="../"></script>
 </body>
 </html>
 `;
