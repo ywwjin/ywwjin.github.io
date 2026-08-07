@@ -6,6 +6,7 @@ function loadHeader() {
         <nav>
             <a href="index.html">Home</a>
             <a href="aboutme.html">About Me</a>
+            <a href="blog/index.html">Blog</a>
         </nav>
     </div>
   `;
