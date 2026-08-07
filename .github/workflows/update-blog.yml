@@ -1,10 +1,13 @@
 name: Update Blog Content
 
 on:
-  workflow_dispatch:      # 수동 실행 버튼 (main으로 머지 전까지는 스케줄이 이 브랜치에서 동작하지 않음)
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # 매일 자정 실행
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   build:
@@ -26,14 +29,13 @@ jobs:
           NOTION_DATASOURCE_ID: ${{ secrets.NOTION_DATASOURCE_ID }}
         run: node update_blog.js
 
-      - name: Commit and Push
-        run: |
-          git config --global user.name 'GitHub Actions Bot'
-          git config --global user.email 'actions@github.com'
-          if [[ -n $(git status --porcelain blog) ]]; then
-            git add blog
-            git commit -m "Auto-update: Blog content synced from Notion 🔄"
-            git push origin HEAD:${{ github.ref_name }}
-          else
-            echo "No changes to commit"
-          fi
+      # main이 PR 필수 브랜치 보호 규칙이라 직접 push 대신 PR을 자동 생성/갱신함
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Auto-update: Blog content synced from Notion 🔄"
+          branch: blog-content-update
+          delete-branch: true
+          title: "Blog content update (Notion sync)"
+          body: "Notion에서 자동으로 동기화된 블로그 콘텐츠입니다. 확인 후 merge 해주세요."
