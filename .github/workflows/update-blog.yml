@@ -1,0 +1,39 @@
+name: Update Blog Content
+
+on:
+  workflow_dispatch:      # 수동 실행 버튼 (main으로 머지 전까지는 스케줄이 이 브랜치에서 동작하지 않음)
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Update Script
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_BLOG_DATASOURCE_ID: ${{ secrets.NOTION_BLOG_DATASOURCE_ID }}
+          NOTION_DATASOURCE_ID: ${{ secrets.NOTION_DATASOURCE_ID }}
+        run: node update_blog.js
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          if [[ -n $(git status --porcelain blog) ]]; then
+            git add blog
+            git commit -m "Auto-update: Blog content synced from Notion 🔄"
+            git push origin HEAD:${{ github.ref_name }}
+          else
+            echo "No changes to commit"
+          fi
