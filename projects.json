@@ -1,13 +1,26 @@
 [
   {
-    "id": "2d1ac05e-6bdb-800a-a9c7-c9bffe9d5ce3",
-    "title": "Do not disturb 웹사이트",
+    "id": "391ac05e-6bdb-80e7-9548-c225dbbe5376",
+    "title": "Bering Lab",
     "tags": [],
     "description": "설명이 없습니다.",
     "date": "",
     "github": "#",
-    "image": "https://images.unsplash.com/photo-1592495994946-52ba21a70bdd?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
+    "image": "images/default.jpg",
     "content": ""
+  },
+  {
+    "id": "2d1ac05e-6bdb-800a-a9c7-c9bffe9d5ce3",
+    "title": "Do not disturb",
+    "tags": [
+      "Node.js",
+      "AWS"
+    ],
+    "description": "게임 Do Not Disturb의 웹사이트 개발",
+    "date": "2025-11-01",
+    "github": "#",
+    "image": "https://images.unsplash.com/photo-1592495994946-52ba21a70bdd?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
+    "content": "<h2 style=\"margin-top:2rem; margin-bottom:1rem; font-size:1.8rem;\">Do Not Disturb 의 웹사이트 구현</h2><li style=\"margin-left:1.5rem;\">공모전 제출을 위한 게임</li>"
   },
   {
     "id": "2b8ac05e-6bdb-80ee-ad2b-e7f2b7f92efd",
@@ -19,7 +32,7 @@
     "description": "백엔드를 맡아 api 구현을 담당하였습니다. ",
     "date": "2023-10-01",
     "github": "#",
-    "image": "https://www.notion.so/images/page-cover/rijksmuseum_avercamp_1620.jpg",
+    "image": "https://app.notion.com/images/page-cover/rijksmuseum_avercamp_1620.jpg",
     "content": "<p style=\"margin-bottom:1rem; min-height:1rem;\">안녕하세요</p><p style=\"margin-bottom:1rem; min-height:1rem;\">제 이름은 000입니다</p><p style=\"margin-bottom:1rem; min-height:1rem;\">어쩌구저쩌구</p><p style=\"margin-bottom:1rem; min-height:1rem;\">제가 백엔드를 받아 api를 구현했습니다</p><p style=\"margin-bottom:1rem; min-height:1rem;\">어쩌구</p>"
   },
   {
@@ -32,7 +45,7 @@
     "description": "실시간 포즈 피드백 앱",
     "date": "2025-09-01",
     "github": "#",
-    "image": "https://www.notion.so/images/page-cover/webb2.jpg",
+    "image": "https://app.notion.com/images/page-cover/webb2.jpg",
     "content": ""
   }
 ]
